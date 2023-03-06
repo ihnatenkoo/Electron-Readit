@@ -14,7 +14,9 @@ window.addEventListener('DOMContentLoaded', () => {
 	});
 
 	addUrlBtn.addEventListener('click', () => {
-		if (addUrlInput.value) console.log(addUrlInput.value);
+		if (addUrlInput.value) {
+			appItems.add(addUrlInput.value);
+		}
 	});
 
 	addUrlInput.addEventListener('keyup', (e) => {

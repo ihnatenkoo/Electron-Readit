@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu } = require('electron');
+const { app, BrowserWindow, Menu, ipcMain } = require('electron');
 const mainWindowState = require('electron-window-state');
 const path = require('path');
 
@@ -27,16 +27,22 @@ const createWindow = () => {
 	mainWindow.webContents.openDevTools();
 };
 
-app.on('ready', createWindow);
+const onAddItem = (e, item) => {
+	console.log(item);
+};
+
+app.whenReady().then(() => {
+	createWindow();
+
+	ipcMain.handle('items:add', onAddItem);
+
+	app.on('activate', () => {
+		if (BrowserWindow.getAllWindows().length === 0) createWindow();
+	});
+});
 
 app.on('window-all-closed', () => {
 	if (process.platform !== 'darwin') {
 		app.quit();
-	}
-});
-
-app.on('activate', () => {
-	if (BrowserWindow.getAllWindows().length === 0) {
-		createWindow();
 	}
 });
