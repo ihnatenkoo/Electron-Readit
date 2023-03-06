@@ -13,6 +13,7 @@ body {
 
 	display: flex;
 	flex-direction: column;
+	background-color: #f9fafb;
 }
 
 button {
@@ -30,6 +31,9 @@ button {
 button:hover {
 	text-decoration: underline;
 }
+button:disabled {
+	opacity: 0.7;
+}
 
 input {
 	padding: 16px 8px;
@@ -43,11 +47,11 @@ input:focus {
 
 header {
 	padding: 16px 8px;
-	margin-bottom: 12px;
 	background-color: #9ca3af;
 	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
 	display: flex;
 	gap: 8px;
+	z-index: 2;
 }
 
 main {
@@ -66,10 +70,18 @@ main {
 	width: 100%;
 }
 
+#items {
+	background-color: #f3f4f6;
+}
+
 #no-items {
 	color: #6b7280;
 	text-align: center;
 	font-weight: 700;
+	position: absolute;
+	top: 100px;
+	width: 100%;
+	z-index: -1;
 }
 
 #modal {
@@ -109,7 +121,7 @@ main {
 }
 
 .read-item {
-	padding: 8px;
+	padding: 16px 8px;
 	gap: 24px;
 	display: flex;
 	align-items: center;

@@ -21,6 +21,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	addUrlBtn.addEventListener('click', async () => {
 		if (addUrlInput.value) {
 			addUrlBtn.textContent = 'Loading...';
+			addUrlBtn.disabled = true;
 			loadingError.style.display = 'none';
 
 			const item = await appItems.add(addUrlInput.value);
@@ -29,10 +30,15 @@ window.addEventListener('DOMContentLoaded', () => {
 				modal.style.display = 'none';
 				addUrlInput.value = '';
 				addUrlBtn.textContent = 'Add item';
-				itemsBlock.innerHTML += `<h2>${item.title}</h2>`;
+				addUrlBtn.disabled = false;
+				itemsBlock.innerHTML += `<div class="read-item">
+					<img src=${item.screenshot} alt="thumbnail" />
+					<h2>${item.title}</h2>
+				</div>`;
 			} else {
 				loadingError.style.display = 'block';
 				addUrlBtn.textContent = 'Retry...';
+				addUrlBtn.disabled = false;
 			}
 		}
 	});
