@@ -13,9 +13,10 @@ window.addEventListener('DOMContentLoaded', () => {
 		modal.style.display = 'none';
 	});
 
-	addUrlBtn.addEventListener('click', () => {
+	addUrlBtn.addEventListener('click', async () => {
 		if (addUrlInput.value) {
-			appItems.add(addUrlInput.value);
+			const item = await appItems.add(addUrlInput.value);
+			console.log(item);
 		}
 	});
 

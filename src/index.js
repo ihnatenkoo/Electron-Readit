@@ -27,14 +27,30 @@ const createWindow = () => {
 	mainWindow.webContents.openDevTools();
 };
 
-const onAddItem = (e, item) => {
-	console.log(item);
+const onAddItem = async (e, url) => {
+	let offscreenWindow = new BrowserWindow({
+		width: 500,
+		height: 500,
+		webPreferences: {
+			offscreen: true,
+		},
+	});
+
+	await offscreenWindow.loadURL(url);
+
+	const title = offscreenWindow.getTitle();
+	const capture = await offscreenWindow.webContents.capturePage();
+	const screenshot = capture.toDataURL();
+
+	offscreenWindow.close();
+	offscreenWindow = null;
+
+	return { url, title, screenshot };
 };
 
 app.whenReady().then(() => {
 	createWindow();
-
-	ipcMain.handle('items:add', onAddItem);
+	ipcMain.handle('item:add', onAddItem);
 
 	app.on('activate', () => {
 		if (BrowserWindow.getAllWindows().length === 0) createWindow();
