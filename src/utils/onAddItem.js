@@ -10,16 +10,21 @@ const onAddItem = async (e, url) => {
 		show: false,
 	});
 
-	await offscreenWindow.loadURL(url);
+	try {
+		await offscreenWindow.loadURL(url);
 
-	const title = offscreenWindow.getTitle();
-	const capture = await offscreenWindow.webContents.capturePage();
-	const screenshot = capture.toDataURL();
+		const title = offscreenWindow.getTitle();
+		const capture = await offscreenWindow.webContents.capturePage();
+		const screenshot = capture.toDataURL();
 
-	offscreenWindow.close();
-	offscreenWindow = null;
+		offscreenWindow.close();
+		offscreenWindow = null;
 
-	return { url, title, screenshot };
+		return { url, title, screenshot };
+	} catch (error) {
+		console.log(error);
+		return null;
+	}
 };
 
 module.exports = onAddItem;

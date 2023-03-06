@@ -88,6 +88,7 @@ main {
 	gap: 16px;
 	align-content: center;
 	justify-content: flex-end;
+	align-items: center;
 
 	animation: modal-in 0.15s ease-in forwards;
 }
@@ -99,6 +100,12 @@ main {
 #close-modal {
 	background-color: #fff;
 	color: #000;
+}
+
+#loading-error {
+	display: none;
+	color: #dc2626;
+	font-weight: 700;
 }
 
 .read-item {
