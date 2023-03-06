@@ -2,11 +2,25 @@
 <html>
 	<head>
 		<meta charset="UTF-8" />
-		<title>Hello World!</title>
+		<title>Readit</title>
 		<link rel="stylesheet" href="main.css" />
+		<script src="app.js"></script>
 	</head>
 	<body>
-		<h1>💖 Hello World!</h1>
-		<p>Welcome to your Electron application.</p>
+		<header>
+			<button id="show-modal">+</button>
+			<input id="search" type="text" placeholder="Search..." />
+		</header>
+
+		<main>
+			<p id="no-items">No items</p>
+			<div id="items"></div>
+		</main>
+
+		<div id="modal">
+			<input id="url" type="text" placeholder="Enter url" />
+			<button id="add-item">Add item</button>
+			<button id="close-modal">Close modal</button>
+		</div>
 	</body>
 </html>
