@@ -9,10 +9,10 @@ window.addEventListener('DOMContentLoaded', () => {
 	const searchInput = document.querySelector('#search');
 
 	const addItemToMarkup = (item) => {
-		itemsBlock.innerHTML += `<div class="read-item">
-					<img src=${item.screenshot} alt="thumbnail" />
-					<h2>${item.title}</h2>
-				</div>`;
+		itemsBlock.innerHTML += `<div class="read-item" data-url=${item.url}>
+				<img src=${item.screenshot} alt="thumbnail" />
+				<h2>${item.title}</h2>
+			</div>`;
 	};
 
 	const renderItems = (newItem) => {
@@ -78,5 +78,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	addUrlInput.addEventListener('keyup', (e) => {
 		if (e.key === 'Enter') addUrlBtn.click();
+	});
+
+	itemsBlock.addEventListener('click', (e) => {
+		if (e.target && e.target.classList.contains('read-item')) {
+			console.log(e.target.dataset.url);
+		}
 	});
 });

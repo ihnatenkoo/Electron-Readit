@@ -140,10 +140,18 @@ main {
 	align-items: center;
 	align-content: center;
 	border-bottom: 1px solid #d1d5db;
+	cursor: pointer;
+	transition: all 0.2s ease-in;
 }
-
 .read-item img {
 	width: 20%;
+	pointer-events: none;
+}
+.read-item h2 {
+	pointer-events: none;
+}
+.read-item:hover {
+	background-color: #d1d5db;
 }
 
 @keyframes modal-in {
