@@ -6,6 +6,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	const addUrlInput = document.querySelector('#url');
 	const addUrlBtn = document.querySelector('#add-item');
 	const itemsBlock = document.querySelector('#items');
+	const searchInput = document.querySelector('#search');
 
 	const addItemToMarkup = (item) => {
 		itemsBlock.innerHTML += `<div class="read-item">
@@ -31,6 +32,16 @@ window.addEventListener('DOMContentLoaded', () => {
 	};
 
 	renderItems();
+
+	searchInput.addEventListener('keyup', (event) => {
+		Array.from(document.querySelectorAll('.read-item')).forEach((item) => {
+			const hasMatch = item.textContent
+				.toLowerCase()
+				.includes(searchInput.value.toLowerCase());
+
+			item.style.display = hasMatch ? 'flex' : 'none';
+		});
+	});
 
 	showModalBtn.addEventListener('click', () => {
 		modal.style.display = 'flex';
