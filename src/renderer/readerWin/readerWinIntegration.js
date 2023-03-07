@@ -6,6 +6,10 @@ panelCloseBtn.textContent = 'Close';
 panelCloseBtn.className = 'close-readit';
 panel.append(panelCloseBtn);
 
+panelCloseBtn.addEventListener('click', (e) => {
+	e.view.close();
+});
+
 const panelDeleteBtn = document.createElement('button');
 panelDeleteBtn.textContent = 'Delete bookmark';
 panelDeleteBtn.className = 'delete-readit';

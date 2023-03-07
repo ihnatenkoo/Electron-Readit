@@ -42,17 +42,19 @@ const createWindow = () => {
 	mainWindow.loadFile(path.join(__dirname, '/renderer/main.html'));
 	Menu.setApplicationMenu(null);
 	mainWindow.webContents.openDevTools();
-};
 
-app.whenReady().then(() => {
-	createWindow();
-	ipcMain.handle('item:add', onAddItem);
 	ipcMain.on('open-reader', (e, url) => {
 		let readWin = new BrowserWindow();
 		readWin.loadURL(url);
 		readWin.webContents.executeJavaScript(readerWinIntegration);
 		readWin.webContents.insertCSS(readerWinIntegrationStyles);
+		readWin.webContents.openDevTools();
 	});
+};
+
+app.whenReady().then(() => {
+	createWindow();
+	ipcMain.handle('item:add', onAddItem);
 
 	app.on('activate', () => {
 		if (BrowserWindow.getAllWindows().length === 0) createWindow();
