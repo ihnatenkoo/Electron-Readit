@@ -7,6 +7,31 @@ window.addEventListener('DOMContentLoaded', () => {
 	const addUrlBtn = document.querySelector('#add-item');
 	const itemsBlock = document.querySelector('#items');
 
+	const addItemToMarkup = (item) => {
+		itemsBlock.innerHTML += `<div class="read-item">
+					<img src=${item.screenshot} alt="thumbnail" />
+					<h2>${item.title}</h2>
+				</div>`;
+	};
+
+	const renderItems = (newItem) => {
+		const savedItems = JSON.parse(localStorage.getItem('readit-items')) ?? [];
+
+		if (newItem) {
+			savedItems.push(newItem);
+			localStorage.setItem('readit-items', JSON.stringify(savedItems));
+			addItemToMarkup(newItem);
+
+			return;
+		}
+
+		savedItems.forEach((item) => {
+			addItemToMarkup(item);
+		});
+	};
+
+	renderItems();
+
 	showModalBtn.addEventListener('click', () => {
 		modal.style.display = 'flex';
 		addUrlInput.focus();
@@ -31,10 +56,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				addUrlInput.value = '';
 				addUrlBtn.textContent = 'Add item';
 				addUrlBtn.disabled = false;
-				itemsBlock.innerHTML += `<div class="read-item">
-					<img src=${item.screenshot} alt="thumbnail" />
-					<h2>${item.title}</h2>
-				</div>`;
+				renderItems(item);
 			} else {
 				loadingError.style.display = 'block';
 				addUrlBtn.textContent = 'Retry...';
