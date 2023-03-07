@@ -1,0 +1,36 @@
+.panel-readit {
+	width: 100%;
+	padding: 5px 10px;
+	display: flex;
+	position: fixed;
+	justify-content: flex-end;
+	gap: 20px;
+	bottom: 15px;
+	left: 0;
+	z-index: 999;
+
+	background-color: rgba(156, 163, 175, 0.9);
+	box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+	border-radius: 5px;
+}
+
+.panel-readit > button {
+	border: none;
+	padding: 4px 8px;
+	border-radius: 5px;
+	font-size: 20px;
+	line-height: 1.5;
+	color: #ffff;
+	font-weight: 700;
+	cursor: pointer;
+}
+
+.panel-readit > button:hover {
+	text-decoration: underline;
+}
+.close-readit {
+	background-color: #3b82f6;
+}
+.delete-readit {
+	background-color: #ef4444;
+}
