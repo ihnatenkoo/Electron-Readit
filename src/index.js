@@ -31,6 +31,10 @@ const createWindow = () => {
 app.whenReady().then(() => {
 	createWindow();
 	ipcMain.handle('item:add', onAddItem);
+	ipcMain.on('open-reader', (e, url) => {
+		let ReadWin = new BrowserWindow();
+		ReadWin.loadURL(url);
+	});
 
 	app.on('activate', () => {
 		if (BrowserWindow.getAllWindows().length === 0) createWindow();

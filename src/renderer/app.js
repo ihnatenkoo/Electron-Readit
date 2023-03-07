@@ -82,7 +82,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	itemsBlock.addEventListener('click', (e) => {
 		if (e.target && e.target.classList.contains('read-item')) {
-			console.log(e.target.dataset.url);
+			const url = e.target.dataset.url;
+			appItems.openReadWin(url);
 		}
 	});
 });
