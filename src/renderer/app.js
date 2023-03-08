@@ -7,6 +7,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	const addUrlBtn = document.querySelector('#add-item');
 	const itemsBlock = document.querySelector('#items');
 	const searchInput = document.querySelector('#search');
+	const clearSearchInput = document.querySelector('.clear-search');
 
 	const deleteItem = (id) => {
 		const savedItems = JSON.parse(localStorage.getItem('readit-items')) ?? [];
@@ -78,12 +79,21 @@ window.addEventListener('DOMContentLoaded', () => {
 	});
 
 	searchInput.addEventListener('keyup', (event) => {
-		Array.from(document.querySelectorAll('.read-item')).forEach((item) => {
-			const hasMatch = item.textContent
-				.toLowerCase()
+		clearSearchInput.style.display = searchInput.value ? 'block' : 'none';
+		document.querySelectorAll('.read-item').forEach((item) => {
+			const hasMatch = item
+				.querySelector('h2')
+				.textContent.toLowerCase()
 				.includes(searchInput.value.toLowerCase());
-
 			item.style.display = hasMatch ? 'flex' : 'none';
+		});
+	});
+
+	clearSearchInput.addEventListener('click', (event) => {
+		searchInput.value = '';
+		clearSearchInput.style.display = 'none';
+		document.querySelectorAll('.read-item').forEach((item) => {
+			item.style.display = 'flex';
 		});
 	});
 
