@@ -8,16 +8,15 @@ window.addEventListener('DOMContentLoaded', () => {
 	const itemsBlock = document.querySelector('#items');
 	const searchInput = document.querySelector('#search');
 
-	const onDeleteItem = (id) => {
+	const deleteItem = (id) => {
 		const savedItems = JSON.parse(localStorage.getItem('readit-items')) ?? [];
 		const filtered = savedItems.filter((i) => i.id !== id);
-
 		localStorage.setItem('readit-items', JSON.stringify(filtered));
 		itemsBlock.innerHTML = '';
 		renderItems();
 	};
 
-	const addItemToMarkup = (item) => {
+	const addItem = (item) => {
 		const readItem = document.createElement('div');
 		readItem.className = 'read-item';
 		readItem.setAttribute('data-url', item.url);
@@ -35,7 +34,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			e.currentTarget.classList.add('active');
 
 			if (e.target.classList.contains('readit-delete')) {
-				onDeleteItem(e.currentTarget.dataset.id);
+				deleteItem(e.currentTarget.dataset.id);
 			}
 		});
 
@@ -48,13 +47,13 @@ window.addEventListener('DOMContentLoaded', () => {
 		if (newItem) {
 			savedItems.push(newItem);
 			localStorage.setItem('readit-items', JSON.stringify(savedItems));
-			addItemToMarkup(newItem);
+			addItem(newItem);
 
 			return;
 		}
 
 		savedItems.forEach((item) => {
-			addItemToMarkup(item);
+			addItem(item);
 		});
 
 		const readItems = document.getElementsByClassName('read-item');
@@ -134,6 +133,6 @@ window.addEventListener('DOMContentLoaded', () => {
 	});
 
 	appItems.deleteItemToRenderer((_event, id) => {
-		onDeleteItem(id);
+		deleteItem(id);
 	});
 });

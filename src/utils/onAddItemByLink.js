@@ -1,6 +1,6 @@
 const { BrowserWindow } = require('electron');
 
-const onAddItem = async (e, url) => {
+const onAddItemByLink = async (e, url) => {
 	let offscreenWindow = new BrowserWindow({
 		width: 500,
 		height: 500,
@@ -27,4 +27,4 @@ const onAddItem = async (e, url) => {
 	}
 };
 
-module.exports = onAddItem;
+module.exports = onAddItemByLink;
