@@ -8,6 +8,15 @@ window.addEventListener('DOMContentLoaded', () => {
 	const itemsBlock = document.querySelector('#items');
 	const searchInput = document.querySelector('#search');
 
+	const onDeleteItem = (id) => {
+		const savedItems = JSON.parse(localStorage.getItem('readit-items')) ?? [];
+		const filtered = savedItems.filter((i) => i.id !== id);
+
+		localStorage.setItem('readit-items', JSON.stringify(filtered));
+		itemsBlock.innerHTML = '';
+		renderItems();
+	};
+
 	const addItemToMarkup = (item) => {
 		const readItem = document.createElement('div');
 		readItem.className = 'read-item';
@@ -24,6 +33,10 @@ window.addEventListener('DOMContentLoaded', () => {
 			const activeEl = document.getElementsByClassName('read-item active')[0];
 			if (activeEl) activeEl.classList.remove('active');
 			e.currentTarget.classList.add('active');
+
+			if (e.target.classList.contains('readit-delete')) {
+				onDeleteItem(e.currentTarget.dataset.id);
+			}
 		});
 
 		itemsBlock.appendChild(readItem);
@@ -120,12 +133,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		}
 	});
 
-	appItems.deleteItemToRenderer((_event, index) => {
-		const savedItems = JSON.parse(localStorage.getItem('readit-items')) ?? [];
-		const filtered = savedItems.filter((i) => i.id !== index);
-
-		localStorage.setItem('readit-items', JSON.stringify(filtered));
-		itemsBlock.innerHTML = '';
-		renderItems();
+	appItems.deleteItemToRenderer((_event, id) => {
+		onDeleteItem(id);
 	});
 });

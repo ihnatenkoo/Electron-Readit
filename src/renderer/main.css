@@ -168,7 +168,7 @@ main {
 
 .readit-delete {
 	display: none;
-	color: #ef4444;
+	color: #3b82f6;
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -177,7 +177,12 @@ main {
 	font-style: italic;
 	text-decoration: underline;
 	z-index: 1;
+	transition: add 0.15s ease-in;
 	animation: fade-in 0.15s ease-in forwards;
+}
+
+.readit-delete:hover {
+	color: #ef4444;
 }
 
 @keyframes fade-in {
