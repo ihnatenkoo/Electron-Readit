@@ -15,4 +15,9 @@ panelDeleteBtn.textContent = 'Delete bookmark';
 panelDeleteBtn.className = 'delete-readit';
 panel.append(panelDeleteBtn);
 
+panelDeleteBtn.addEventListener('click', (e) => {
+	appItems.deleteItemFromReader('index');
+	e.view.close();
+});
+
 document.getElementsByTagName('body')[0].append(panel);

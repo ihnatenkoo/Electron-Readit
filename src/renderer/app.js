@@ -9,7 +9,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	const searchInput = document.querySelector('#search');
 
 	const addItemToMarkup = (item) => {
-		itemsBlock.innerHTML += `<div class="read-item" data-url=${item.url}>
+		itemsBlock.innerHTML += `<div class="read-item" data-url=${item.url} data-id=${item.id}>
 				<img src=${item.screenshot} alt="thumbnail" />
 				<h2>${item.title}</h2>
 			</div>`;
@@ -83,7 +83,17 @@ window.addEventListener('DOMContentLoaded', () => {
 	itemsBlock.addEventListener('click', (e) => {
 		if (e.target && e.target.classList.contains('read-item')) {
 			const url = e.target.dataset.url;
-			appItems.openReadWin(url);
+			const id = e.target.dataset.id;
+			appItems.openReadWin(url, id);
 		}
+	});
+
+	appItems.deleteItemToRenderer((_event, index) => {
+		const savedItems = JSON.parse(localStorage.getItem('readit-items')) ?? [];
+		const filtered = savedItems.filter((i) => i.id !== index);
+
+		localStorage.setItem('readit-items', JSON.stringify(filtered));
+		itemsBlock.innerHTML = '';
+		renderItems();
 	});
 });

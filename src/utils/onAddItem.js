@@ -20,7 +20,7 @@ const onAddItem = async (e, url) => {
 		offscreenWindow.close();
 		offscreenWindow = null;
 
-		return { url, title, screenshot };
+		return { url, title, screenshot, id: `${+Date.now()}` };
 	} catch (error) {
 		console.log(error);
 		return null;

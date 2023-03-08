@@ -43,12 +43,21 @@ const createWindow = () => {
 	Menu.setApplicationMenu(null);
 	mainWindow.webContents.openDevTools();
 
-	ipcMain.on('open-reader', (e, url) => {
-		let readWin = new BrowserWindow();
+	ipcMain.on('open-reader', (e, url, id) => {
+		let readWin = new BrowserWindow({
+			webPreferences: {
+				preload: path.join(__dirname, 'preload.js'),
+			},
+		});
 		readWin.loadURL(url);
-		readWin.webContents.executeJavaScript(readerWinIntegration);
+		readWin.webContents.executeJavaScript(
+			readerWinIntegration.replace('index', id)
+		);
 		readWin.webContents.insertCSS(readerWinIntegrationStyles);
-		readWin.webContents.openDevTools();
+	});
+
+	ipcMain.on('item:delete-from-reader', (e, index) => {
+		mainWindow.webContents.send('item:delete-to-renderer', index);
 	});
 };
 
