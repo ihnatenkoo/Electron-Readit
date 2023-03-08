@@ -9,10 +9,23 @@ window.addEventListener('DOMContentLoaded', () => {
 	const searchInput = document.querySelector('#search');
 
 	const addItemToMarkup = (item) => {
-		itemsBlock.innerHTML += `<div class="read-item" data-url=${item.url} data-id=${item.id}>
+		const readItem = document.createElement('div');
+		readItem.className = 'read-item';
+		readItem.setAttribute('data-url', item.url);
+		readItem.setAttribute('data-id', item.id);
+
+		readItem.innerHTML = `
 				<img src=${item.screenshot} alt="thumbnail" />
 				<h2>${item.title}</h2>
-			</div>`;
+			`;
+
+		readItem.addEventListener('click', (e) => {
+			const activeEl = document.getElementsByClassName('read-item active')[0];
+			if (activeEl) activeEl.classList.remove('active');
+			e.currentTarget.classList.add('active');
+		});
+
+		itemsBlock.appendChild(readItem);
 	};
 
 	const renderItems = (newItem) => {
@@ -29,6 +42,11 @@ window.addEventListener('DOMContentLoaded', () => {
 		savedItems.forEach((item) => {
 			addItemToMarkup(item);
 		});
+
+		const readItems = document.getElementsByClassName('read-item');
+		if (readItems.length) {
+			readItems[0].classList.add('active');
+		}
 	};
 
 	renderItems();
@@ -80,7 +98,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		if (e.key === 'Enter') addUrlBtn.click();
 	});
 
-	itemsBlock.addEventListener('click', (e) => {
+	itemsBlock.addEventListener('dblclick', (e) => {
 		if (e.target && e.target.classList.contains('read-item')) {
 			const url = e.target.dataset.url;
 			const id = e.target.dataset.id;
