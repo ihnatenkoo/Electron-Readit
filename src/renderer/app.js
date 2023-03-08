@@ -51,6 +51,19 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	renderItems();
 
+	document.addEventListener('keydown', (e) => {
+		let activeReadItem = document.getElementsByClassName('read-item active')[0];
+
+		if (e.key === 'ArrowUp' && activeReadItem.previousElementSibling) {
+			activeReadItem.classList.remove('active');
+			activeReadItem.previousElementSibling.classList.add('active');
+		}
+		if (e.key === 'ArrowDown' && activeReadItem.nextElementSibling) {
+			activeReadItem.classList.remove('active');
+			activeReadItem.nextElementSibling.classList.add('active');
+		}
+	});
+
 	searchInput.addEventListener('keyup', (event) => {
 		Array.from(document.querySelectorAll('.read-item')).forEach((item) => {
 			const hasMatch = item.textContent
