@@ -17,6 +17,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		readItem.innerHTML = `
 				<img src=${item.screenshot} alt="thumbnail" />
 				<h2>${item.title}</h2>
+				<button class="readit-delete">Delete</button>
 			`;
 
 		readItem.addEventListener('click', (e) => {

@@ -114,8 +114,7 @@ main {
 	align-content: center;
 	justify-content: flex-end;
 	align-items: center;
-
-	animation: modal-in 0.15s ease-in forwards;
+	animation: fade-in 0.15s ease-in forwards;
 }
 
 #add-item {
@@ -142,6 +141,7 @@ main {
 	border-bottom: 1px solid #d1d5db;
 	border-left: 10px solid #d1d5db;
 	cursor: pointer;
+	position: relative;
 	transition: all 0.2s ease-in;
 	user-select: none;
 	-webkit-user-select: none;
@@ -162,7 +162,25 @@ main {
 	border-left-color: #3b82f6;
 }
 
-@keyframes modal-in {
+.read-item.active .readit-delete {
+	display: block;
+}
+
+.readit-delete {
+	display: none;
+	color: #ef4444;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: 15px;
+	font-weight: 400;
+	font-style: italic;
+	text-decoration: underline;
+	z-index: 1;
+	animation: fade-in 0.15s ease-in forwards;
+}
+
+@keyframes fade-in {
 	from {
 		opacity: 0;
 	}
