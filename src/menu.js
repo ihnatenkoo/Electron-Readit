@@ -1,4 +1,4 @@
-const { Menu, shell } = require('electron');
+const { Menu, shell, ipcMain } = require('electron');
 
 module.exports = (webContents) => {
 	let template = [
@@ -13,10 +13,20 @@ module.exports = (webContents) => {
 					},
 				},
 				{
-					label: 'Open item',
+					label: 'Open',
 					accelerator: 'CmdOrCtrl + Enter',
 					click: () => {
 						webContents.send('open-item-in-reader');
+					},
+				},
+				{
+					label: 'Open in Browser',
+					accelerator: 'CmdOrCtrl + Shift + Enter',
+					click: () => {
+						webContents.send('open-in-native-browser');
+						ipcMain.on('id-to-native-browser', (_e, url) =>
+							shell.openExternal(url)
+						);
 					},
 				},
 				{

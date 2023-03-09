@@ -15,4 +15,7 @@ contextBridge.exposeInMainWorld('appMenu', {
 	openModal: (callback) => ipcRenderer.on('open-modal', callback),
 	deleteItem: (callback) => ipcRenderer.on('delete-item', callback),
 	searchItem: (callback) => ipcRenderer.on('search-item', callback),
+	openInNativeBrowser: (callback) =>
+		ipcRenderer.on('open-in-native-browser', callback),
+	getUrlToNativeBrowser: (url) => ipcRenderer.send('id-to-native-browser', url),
 });

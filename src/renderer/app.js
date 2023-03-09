@@ -182,4 +182,10 @@ window.addEventListener('DOMContentLoaded', () => {
 	appMenu.searchItem((_event) => {
 		searchInput.focus();
 	});
+
+	appMenu.openInNativeBrowser((_event) => {
+		const activeItem = getActiveItem();
+		const url = activeItem.dataset.url;
+		appMenu.getUrlToNativeBrowser(url);
+	});
 });
