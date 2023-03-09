@@ -38,7 +38,6 @@ const createWindow = () => {
 	stateWin.manage(mainWindow);
 	mainWindow.loadFile(path.join(__dirname, '/renderer/main.html'));
 	appMenu(mainWindow.webContents);
-	mainWindow.webContents.openDevTools();
 };
 
 app.whenReady().then(() => {
