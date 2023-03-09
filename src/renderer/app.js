@@ -10,7 +10,10 @@ window.addEventListener('DOMContentLoaded', () => {
 	const clearSearchInput = document.querySelector('.clear-search');
 
 	const getActiveItem = () => {
-		return document.querySelector('.read-item.active');
+		const activeItem = document.querySelector('.read-item.active');
+		const url = activeItem.dataset.url;
+		const id = activeItem.dataset.id;
+		return { activeItem, url, id };
 	};
 
 	const deleteItem = (id) => {
@@ -34,8 +37,8 @@ window.addEventListener('DOMContentLoaded', () => {
 			`;
 
 		readItem.addEventListener('click', (e) => {
-			const activeEl = getActiveItem();
-			if (activeEl) activeEl.classList.remove('active');
+			const { activeItem } = getActiveItem();
+			if (activeItem) activeItem.classList.remove('active');
 			e.currentTarget.classList.add('active');
 
 			if (e.target.classList.contains('readit-delete')) {
@@ -74,23 +77,19 @@ window.addEventListener('DOMContentLoaded', () => {
 	renderItems();
 
 	document.addEventListener('keydown', (e) => {
-		let activeReadItem = getActiveItem();
+		let { activeItem } = getActiveItem();
 
 		if (
 			e.key === 'ArrowUp' &&
-			activeReadItem &&
-			activeReadItem.previousElementSibling
+			activeItem &&
+			activeItem.previousElementSibling
 		) {
-			activeReadItem.classList.remove('active');
-			activeReadItem.previousElementSibling.classList.add('active');
+			activeItem.classList.remove('active');
+			activeItem.previousElementSibling.classList.add('active');
 		}
-		if (
-			e.key === 'ArrowDown' &&
-			activeReadItem &&
-			activeReadItem.nextElementSibling
-		) {
-			activeReadItem.classList.remove('active');
-			activeReadItem.nextElementSibling.classList.add('active');
+		if (e.key === 'ArrowDown' && activeItem && activeItem.nextElementSibling) {
+			activeItem.classList.remove('active');
+			activeItem.nextElementSibling.classList.add('active');
 		}
 	});
 
@@ -167,15 +166,12 @@ window.addEventListener('DOMContentLoaded', () => {
 	});
 
 	appMenu.openItemInReadWin((_event) => {
-		const activeItem = getActiveItem();
-		const url = activeItem.dataset.url;
-		const id = activeItem.dataset.id;
+		const { url, id } = getActiveItem();
 		appItems.openReadWin(url, id);
 	});
 
 	appMenu.deleteItem((_event) => {
-		const activeItem = getActiveItem();
-		const id = activeItem.dataset.id;
+		const { id } = getActiveItem();
 		deleteItem(id);
 	});
 
@@ -184,8 +180,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	});
 
 	appMenu.openInNativeBrowser((_event) => {
-		const activeItem = getActiveItem();
-		const url = activeItem.dataset.url;
+		const { url } = getActiveItem();
 		appMenu.getUrlToNativeBrowser(url);
 	});
 });
