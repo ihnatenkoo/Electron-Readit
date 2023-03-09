@@ -14,7 +14,7 @@ module.exports = (webContents) => {
 				},
 				{
 					label: 'Open item',
-					accelerator: 'Enter',
+					accelerator: 'CmdOrCtrl + Enter',
 					click: () => {
 						webContents.send('open-item-in-reader');
 					},
@@ -24,6 +24,13 @@ module.exports = (webContents) => {
 					accelerator: 'Delete',
 					click: () => {
 						webContents.send('delete-item');
+					},
+				},
+				{
+					label: 'Search item',
+					accelerator: 'CmdOrCtrl + S',
+					click: () => {
+						webContents.send('search-item');
 					},
 				},
 			],

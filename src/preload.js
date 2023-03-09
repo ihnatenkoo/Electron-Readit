@@ -14,4 +14,5 @@ contextBridge.exposeInMainWorld('appMenu', {
 		ipcRenderer.on('open-item-in-reader', callback),
 	openModal: (callback) => ipcRenderer.on('open-modal', callback),
 	deleteItem: (callback) => ipcRenderer.on('delete-item', callback),
+	searchItem: (callback) => ipcRenderer.on('search-item', callback),
 });

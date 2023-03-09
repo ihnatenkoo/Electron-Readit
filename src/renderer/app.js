@@ -178,4 +178,8 @@ window.addEventListener('DOMContentLoaded', () => {
 		const id = activeItem.dataset.id;
 		deleteItem(id);
 	});
+
+	appMenu.searchItem((_event) => {
+		searchInput.focus();
+	});
 });
