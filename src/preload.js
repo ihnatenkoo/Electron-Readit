@@ -7,4 +7,7 @@ contextBridge.exposeInMainWorld('appItems', {
 	deleteItemToRenderer: (callback) =>
 		ipcRenderer.on('item:delete-to-renderer', callback),
 	openReadWin: (url, id) => ipcRenderer.send('open-reader', url, id),
+	openItemInReadWin: (callback) =>
+		ipcRenderer.on('open-item-in-reader', callback),
+	openModal: (callback) => ipcRenderer.on('open-modal', callback),
 });

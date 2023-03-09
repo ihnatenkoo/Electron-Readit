@@ -145,4 +145,15 @@ window.addEventListener('DOMContentLoaded', () => {
 	appItems.deleteItemToRenderer((_event, id) => {
 		deleteItem(id);
 	});
+
+	appItems.openModal((_event) => {
+		showModalBtn.click();
+	});
+
+	appItems.openItemInReadWin((_event) => {
+		const activeItem = document.querySelector('.read-item.active');
+		const url = activeItem.dataset.url;
+		const id = activeItem.dataset.id;
+		appItems.openReadWin(url, id);
+	});
 });

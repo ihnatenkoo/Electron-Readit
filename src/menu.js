@@ -4,7 +4,22 @@ module.exports = (webContents) => {
 	let template = [
 		{
 			label: 'Items',
-			submenu: [],
+			submenu: [
+				{
+					label: 'Add new',
+					accelerator: 'CmdOrCtrl + O',
+					click: () => {
+						webContents.send('open-modal');
+					},
+				},
+				{
+					label: 'Open item',
+					accelerator: 'Enter',
+					click: () => {
+						webContents.send('open-item-in-reader');
+					},
+				},
+			],
 		},
 		{ role: 'editMenu' },
 		{ role: 'windowMenu' },
