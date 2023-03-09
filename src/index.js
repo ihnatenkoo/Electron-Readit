@@ -1,8 +1,9 @@
-const { app, BrowserWindow, Menu, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const mainWindowState = require('electron-window-state');
 const fs = require('fs');
 const path = require('path');
 const onAddItemByLink = require('./utils/onAddItemByLink');
+const appMenu = require('./menu');
 
 let mainWindow;
 
@@ -36,7 +37,7 @@ const createWindow = () => {
 
 	stateWin.manage(mainWindow);
 	mainWindow.loadFile(path.join(__dirname, '/renderer/main.html'));
-	Menu.setApplicationMenu(null);
+	appMenu(mainWindow.webContents);
 	mainWindow.webContents.openDevTools();
 };
 
