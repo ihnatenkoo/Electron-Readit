@@ -9,6 +9,10 @@ window.addEventListener('DOMContentLoaded', () => {
 	const searchInput = document.querySelector('#search');
 	const clearSearchInput = document.querySelector('.clear-search');
 
+	const getActiveItem = () => {
+		return document.querySelector('.read-item.active');
+	};
+
 	const deleteItem = (id) => {
 		const savedItems = JSON.parse(localStorage.getItem('readit-items')) ?? [];
 		const filtered = savedItems.filter((i) => i.id !== id);
@@ -30,7 +34,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			`;
 
 		readItem.addEventListener('click', (e) => {
-			const activeEl = document.getElementsByClassName('read-item active')[0];
+			const activeEl = getActiveItem();
 			if (activeEl) activeEl.classList.remove('active');
 			e.currentTarget.classList.add('active');
 
@@ -70,7 +74,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	renderItems();
 
 	document.addEventListener('keydown', (e) => {
-		let activeReadItem = document.getElementsByClassName('read-item active')[0];
+		let activeReadItem = getActiveItem();
 
 		if (
 			e.key === 'ArrowUp' &&
@@ -163,14 +167,14 @@ window.addEventListener('DOMContentLoaded', () => {
 	});
 
 	appMenu.openItemInReadWin((_event) => {
-		const activeItem = document.querySelector('.read-item.active');
+		const activeItem = getActiveItem();
 		const url = activeItem.dataset.url;
 		const id = activeItem.dataset.id;
 		appItems.openReadWin(url, id);
 	});
 
 	appMenu.deleteItem((_event) => {
-		const activeItem = document.querySelector('.read-item.active');
+		const activeItem = getActiveItem();
 		const id = activeItem.dataset.id;
 		deleteItem(id);
 	});
