@@ -48,7 +48,11 @@ window.addEventListener('DOMContentLoaded', () => {
 		if (newItem) {
 			savedItems.push(newItem);
 			localStorage.setItem('readit-items', JSON.stringify(savedItems));
+
 			addItem(newItem);
+
+			if (savedItems.length === 1)
+				document.querySelector('.read-item').classList.add('active');
 
 			return;
 		}
@@ -68,17 +72,25 @@ window.addEventListener('DOMContentLoaded', () => {
 	document.addEventListener('keydown', (e) => {
 		let activeReadItem = document.getElementsByClassName('read-item active')[0];
 
-		if (e.key === 'ArrowUp' && activeReadItem.previousElementSibling) {
+		if (
+			e.key === 'ArrowUp' &&
+			activeReadItem &&
+			activeReadItem.previousElementSibling
+		) {
 			activeReadItem.classList.remove('active');
 			activeReadItem.previousElementSibling.classList.add('active');
 		}
-		if (e.key === 'ArrowDown' && activeReadItem.nextElementSibling) {
+		if (
+			e.key === 'ArrowDown' &&
+			activeReadItem &&
+			activeReadItem.nextElementSibling
+		) {
 			activeReadItem.classList.remove('active');
 			activeReadItem.nextElementSibling.classList.add('active');
 		}
 	});
 
-	searchInput.addEventListener('keyup', (event) => {
+	searchInput.addEventListener('keyup', () => {
 		clearSearchInput.style.display = searchInput.value ? 'block' : 'none';
 		document.querySelectorAll('.read-item').forEach((item) => {
 			const hasMatch = item
@@ -89,7 +101,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		});
 	});
 
-	clearSearchInput.addEventListener('click', (event) => {
+	clearSearchInput.addEventListener('click', () => {
 		searchInput.value = '';
 		clearSearchInput.style.display = 'none';
 		document.querySelectorAll('.read-item').forEach((item) => {
