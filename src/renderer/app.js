@@ -146,14 +146,20 @@ window.addEventListener('DOMContentLoaded', () => {
 		deleteItem(id);
 	});
 
-	appItems.openModal((_event) => {
+	appMenu.openModal((_event) => {
 		showModalBtn.click();
 	});
 
-	appItems.openItemInReadWin((_event) => {
+	appMenu.openItemInReadWin((_event) => {
 		const activeItem = document.querySelector('.read-item.active');
 		const url = activeItem.dataset.url;
 		const id = activeItem.dataset.id;
 		appItems.openReadWin(url, id);
+	});
+
+	appMenu.deleteItem((_event) => {
+		const activeItem = document.querySelector('.read-item.active');
+		const id = activeItem.dataset.id;
+		deleteItem(id);
 	});
 });

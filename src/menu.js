@@ -19,6 +19,13 @@ module.exports = (webContents) => {
 						webContents.send('open-item-in-reader');
 					},
 				},
+				{
+					label: 'Delete item',
+					accelerator: 'Delete',
+					click: () => {
+						webContents.send('delete-item');
+					},
+				},
 			],
 		},
 		{ role: 'editMenu' },

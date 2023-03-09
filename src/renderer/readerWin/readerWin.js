@@ -16,7 +16,7 @@ panelDeleteBtn.className = 'delete-readit';
 panel.append(panelDeleteBtn);
 
 panelDeleteBtn.addEventListener('click', (e) => {
-	appItems.deleteItemFromReader('index');
+	appItems.deleteItemFromReader('id');
 	e.view.close();
 });
 

@@ -52,13 +52,14 @@ app.whenReady().then(() => {
 				preload: path.join(__dirname, 'preload.js'),
 			},
 		});
+		readWin.setMenu(null);
 		readWin.loadURL(url);
-		readWin.webContents.executeJavaScript(readerWin.replace('index', id));
+		readWin.webContents.executeJavaScript(readerWin.replace('id', id));
 		readWin.webContents.insertCSS(readerWinStyles);
 	});
 
-	ipcMain.on('item:delete-from-reader', (e, index) => {
-		mainWindow.webContents.send('item:delete-to-renderer', index);
+	ipcMain.on('item:delete-from-reader', (e, id) => {
+		mainWindow.webContents.send('item:delete-to-renderer', id);
 	});
 
 	app.on('activate', () => {
